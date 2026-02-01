@@ -1,32 +1,32 @@
 import 'package:flutter/foundation.dart';
+import '../data/notes_repository.dart';
 import '../models/note.dart';
 
 class NotesViewModel extends ChangeNotifier {
-  final List<Note> _notes = [];
+  final NotesRepository _repository;
 
-  List<Note> get notes => List.unmodifiable(_notes);
+  NotesViewModel(this._repository);
 
-  void addNote(String title, String content) {
-    _notes.add(
-      Note(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        title: title,
-        content: content,
-        createdAt: DateTime.now()
-      )
-    );
+  List<Note> _notes = [];
+  List<Note> get notes => _notes;
+
+  void loadNotes() {
+    _notes = _repository.getNotes();
     notifyListeners();
   }
 
-  void deleteNote(String id) {
-    _notes.removeWhere((note) => note.id == id);
-    notifyListeners();
+  void addNote(Note note) {
+    _repository.addNote(note);
+    loadNotes();
   }
 
-  void updateNote(String id, String newTitle, String newContent) {
-    final note = _notes.firstWhere((note) => note.id == id);
-    note.title = newTitle;
-    note.content = newContent;
-    notifyListeners();
+  void deleteNote(note) {
+    _repository.deleteNote(note);
+    loadNotes();
+  }
+
+  void updateNote(Note note, String newTitle, String newContent) {
+    _repository.updateNote(note, newTitle, newContent);
+    loadNotes();
   }
 }

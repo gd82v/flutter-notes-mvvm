@@ -26,8 +26,6 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
       _titleController.text = widget.note!.title;
       _contentController.text = widget.note!.content;
     }
-
-    widget.viewModel.addListener(_onViewModelChanged);
   }
 
   void _onViewModelChanged() {
@@ -73,9 +71,11 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
     final content = _contentController.text.trim();
 
     if (widget.note == null) {
-      widget.viewModel.addNote(title, content);
+      widget.viewModel.addNote(
+        Note(title: title, content: content),
+      );
     } else {
-      widget.viewModel.updateNote(widget.note!.id, title, content);
+      widget.viewModel.updateNote(widget.note!, title, content);
     }
 
       Navigator.pop(context);

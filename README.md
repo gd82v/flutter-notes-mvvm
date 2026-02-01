@@ -12,6 +12,7 @@ The project follows the **MVVM (Model–View–ViewModel)** pattern:
 - **Model** — data structure of a note
 - **View** — UI screens
 - **ViewModel** — business logic and state management
+- **Repository** — data access layer using **Hive**
 
 
 ## Features
@@ -21,12 +22,19 @@ The project follows the **MVVM (Model–View–ViewModel)** pattern:
 - Edit an existing note
 - Delete a note
 - Navigation between screens
+- Save note (notes are saved locally)
 
 
 ## Screenshots
 
 ![Screenshot 1](Screenshots/Notes_list.png)
 ![Screenshot 2](Screenshots/Add_new_note.png)
+
+
+## Technologies 
+- Flutter
+- Hive 
+- MVVM architecture
 
 
 ## Run the project
